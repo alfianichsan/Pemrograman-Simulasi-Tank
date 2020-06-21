@@ -46,8 +46,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kecepatanRotasi: 20
-  selongsong: {fileID: 7155911983229327311}
+  kecepatanAwalPeluru: 20
   nilaiRotasiY: 0
+  sudutMeriam: 0
+  objectTembakan: {fileID: 0}
+  objectLedakan: {fileID: 0}
+  peluruMeriam: {fileID: 0}
+  audioTembakan: {fileID: 0}
+  audioLedakan: {fileID: 0}
 --- !u!1 &5472238713436085181
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +331,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 00845def8b85ae149b1b6113f408a8d4, type: 2}
+  - {fileID: 2100000, guid: 5c3c9cb596f390a4d975f7444bc99a10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -402,7 +408,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100012, guid: fd27caf16380a1440b2b128024a2db32, type: 3}
+  - {fileID: 2100000, guid: ecb0973945c1c6742a1f2891e0d87233, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -479,7 +485,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 00845def8b85ae149b1b6113f408a8d4, type: 2}
+  - {fileID: 2100000, guid: 5c3c9cb596f390a4d975f7444bc99a10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -556,7 +562,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 00845def8b85ae149b1b6113f408a8d4, type: 2}
+  - {fileID: 2100000, guid: 5c3c9cb596f390a4d975f7444bc99a10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

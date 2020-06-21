@@ -5,16 +5,32 @@ using UnityEngine;
 public class TankBehaviorScript : MonoBehaviour
 {
     private Transform myTransform;
-    public float kecepatanRotasi = 20;
-    public GameObject selongsong;
-    public float nilaiRotasiY;
+    
+    private GameObject selongsong;
+    private GameObject titikTembakan;
+    private AudioSource audioSource;
     private string stateRotasiVertical;
+
+    public float kecepatanRotasi = 20;
+    public float kecepatanAwalPeluru = 20; //nilai Vo
+    public float nilaiRotasiY; //bentuk nilai Cos a
+    public float sudutMeriam;
+
+    public GameObject objectTembakan;
+    public GameObject objectLedakan;
+    public GameObject peluruMeriam;
+    public AudioClip audioTembakan;
+    public AudioClip audioLedakan;
 
     // Start is called before the first frame update
     void Start()
     {
         myTransform = transform;
         selongsong = myTransform.Find("selongsong").gameObject; //Jika menggunakan variable private
+
+        titikTembakan = selongsong.transform.Find("titiktembakan").gameObject;
+
+        audioSource = selongsong.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,6 +47,7 @@ public class TankBehaviorScript : MonoBehaviour
         {
             myTransform.Rotate(Vector3.forward * kecepatanRotasi * Time.deltaTime, Space.Self);
         }
+        sudutMeriam = myTransform.localEulerAngles.z;
         #endregion
 
 
@@ -53,8 +70,9 @@ public class TankBehaviorScript : MonoBehaviour
             stateRotasiVertical = "bawah";
         }
         #endregion
-        
 
+
+        #region Rotasi Vertical
         if (stateRotasiVertical == "aman")
         {
             if (Input.GetKey(KeyCode.Y)) //Rotasi berlawanan jarum jam
@@ -77,8 +95,27 @@ public class TankBehaviorScript : MonoBehaviour
             selongsong.transform.localEulerAngles = new Vector3(
                 -14.5f, selongsong.transform.localEulerAngles.y, 0);
         }
+        #endregion
 
-        
+        #region Penembakan
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            #region Initiate Peluru
+            GameObject peluru = Instantiate(peluruMeriam, titikTembakan.transform.position,
+                    Quaternion.Euler(selongsong.transform.localEulerAngles.x, myTransform.localEulerAngles.z, 0));
+            #endregion
 
+            #region Initiate Objek Tembakan
+            GameObject efekTembakan = Instantiate(objectTembakan, titikTembakan.transform.position,
+                    Quaternion.Euler(selongsong.transform.localEulerAngles.x, myTransform.localEulerAngles.z, 0));
+            Destroy(efekTembakan, 2f);
+            #endregion
+
+            #region Initiate Audio Tembakan
+            audioSource.PlayOneShot(audioTembakan);
+            #endregion
+        }
+
+        #endregion
     }
 }
