@@ -16,6 +16,9 @@ public class GerakPeluru : MonoBehaviour
     public AudioClip audioLedakan;
     public GameObject ledakan;
 
+    public GameManagerScript gameManager;
+    private bool isLanded = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,12 +33,17 @@ public class GerakPeluru : MonoBehaviour
         _sudutMeriam = tankBehavior.sudutMeriam;
 
         audioSource = GetComponent<AudioSource>();
+
+        gameManager = GameObject.FindObjectOfType<GameManagerScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(isLanded)
         waktuTerbangPeluru += Time.deltaTime;
+
+        gameManager._lamaWaktuTerbangPeluru = waktuTerbangPeluru;
 
         myTransform.position = PosisiTerbangPeluru(_posisiAwal, _kecAwal, waktuTerbangPeluru, _sudutTembak, _sudutMeriam);
     }
@@ -59,6 +67,10 @@ public class GerakPeluru : MonoBehaviour
             Destroy(go, 2f);
 
             audioSource.PlayOneShot(audioLedakan);
+
+            gameManager._jarakTembak = Vector3.Distance(_posisiAwal, myTransform.position);
+
+            isLanded = false;
         }
 
         else if(other.tag == "Rumah")
